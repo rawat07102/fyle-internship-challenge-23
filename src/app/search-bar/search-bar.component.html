@@ -1,0 +1,20 @@
+<form
+  (ngSubmit)="onSubmit()"
+  #searchForm="ngForm"
+  class="flex flex-col w-full gap-4 items-start"
+>
+  <label for="search-input" class="text-lg text-neutral-800 font-medium">Enter Github Username</label>
+  <input
+    placeholder="Github Username"
+    id="search-input"
+    [(ngModel)]="githubUsername"
+    name="githubUsername"
+    class="border border-sky-950 rounded text-lg p-2 focus:border-sky-500 outline-none w-full"
+  />
+  <button
+    class="rounded uppercase bg-sky-200 text-sky-900 px-3 py-2 shadow hover:bg-sky-100 shadow-sky-100 hover:shadow-sky-400 transition-all duration-200 ease-in self-end font-medium"
+    type="submit"
+  >
+    Search User
+  </button>
+</form>
