@@ -1,5 +1,6 @@
 <main class="w-full h-full grid place-items-center">
-  <div
+  <form
+    (ngSubmit)="onSubmit()"
     class="flex flex-col w-full max-w-md gap-4 items-start shadow shadow-neutral-400 rounded p-4"
   >
     <label for="search-input" class="text-lg text-neutral-800 font-medium"
@@ -14,11 +15,10 @@
     />
     <button
       type="button"
-      [routerLink]="['/github-user', githubUsername]"
       class="rounded uppercase bg-sky-200 text-sky-900 px-3 py-2 shadow hover:bg-sky-100 shadow-sky-100 hover:shadow-sky-400 transition-all duration-200 ease-in self-end font-medium"
       type="submit"
     >
       Search User
     </button>
-  </div>
+  </form>
 </main>

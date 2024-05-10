@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { GithubUser } from '../types/GithubUser.types';
 import { GithubRepo } from '../types/GithubRepo.types';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-github-user',
@@ -18,26 +19,13 @@ export class GithubUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.route.snapshot.paramMap.get('username')!;
-    this.apiService.getUserRepos(this.username).subscribe((repos) => {
-      console.log('data', repos);
-      this.repos = repos;
-      this.user = repos[0].owner;
-    });
-  }
-
-  fetchData() {
+    this.apiService
+      .getUser(this.username)
+      .pipe(tap((user) => (this.user = user)))
+      .subscribe();
     this.apiService
       .getUserRepos(this.username)
-      .subscribe((data) => console.log(data));
-  }
-
-  printCache() {
-    console.log('Cache', this.apiService.getBrowserStore());
-  }
-
-  printData() {
-    console.log(this.repos);
-    console.log(this.user);
-    console.log(this.username);
+      .pipe(tap((repos) => (this.repos = repos)))
+      .subscribe();
   }
 }
