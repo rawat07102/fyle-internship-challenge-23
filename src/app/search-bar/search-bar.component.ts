@@ -8,17 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
+  userNotFound = false;
   githubUsername = '';
   constructor(private apiService: ApiService, private router: Router) {}
 
   onSubmit() {
     this.apiService.getUser(this.githubUsername).subscribe({
       complete: () => {
+        this.userNotFound = false;
         this.router.navigate(['github-user', this.githubUsername]);
       },
       error: () => {
-        alert('Invlid Username');
+        this.userNotFound = true;
       },
     });
+  }
+
+  onInputFocus() {
+    this.userNotFound = false;
   }
 }

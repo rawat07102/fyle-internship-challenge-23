@@ -33,9 +33,11 @@
     </div>
   </div>
   <div *ngIf="repos" class="grid grid-cols-2 gap-10">
-    <div
+    <a
+      href="{{ repo.html_url }}"
+      target="_blank"
       *ngFor="let repo of repos"
-      class="rounded shadow shadow-neutral-500 flex flex-col p-4 gap-4"
+      class="rounded shadow shadow-neutral-500 flex flex-col p-4 gap-4 transition-colors hover:bg-sky-50 duration-100"
     >
       <div class="text-lg text-sky-800">
         {{ repo.name }}
@@ -49,7 +51,7 @@
           {{ topic }}
         </div>
       </div>
-    </div>
+    </a>
   </div>
   <div class="flex gap-2 mx-auto">
     <button
