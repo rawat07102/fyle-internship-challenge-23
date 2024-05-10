@@ -33,6 +33,12 @@ export class GithubUserComponent implements OnInit {
     this.fetchRepos();
   }
 
+  onChange() {
+    this.lastPage = Math.ceil(this.user?.public_repos! / this.perPage);
+    this.page = 1;
+    this.fetchRepos();
+  }
+
   fetchRepos() {
     this.apiService
       .getUserRepos(this.username, this.perPage, this.page)

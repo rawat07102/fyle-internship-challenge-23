@@ -32,12 +32,26 @@
       </a>
     </div>
   </div>
+  <div class="flex justify-end">
+    <select
+      (change)="onChange()"
+      [(ngModel)]="perPage"
+      class="border rounded border-neutral-200 p-2 cursor-pointer hover:border-sky-500 transition-colors duration-100 ease-in"
+    >
+      <option
+        *ngFor="let e of [].constructor(100); let i = index"
+        [value]="i + 1"
+      >
+        {{ i + 1 }}
+      </option>
+    </select>
+  </div>
   <div *ngIf="repos" class="grid grid-cols-2 gap-10">
     <a
       href="{{ repo.html_url }}"
       target="_blank"
       *ngFor="let repo of repos"
-      class="rounded shadow shadow-neutral-500 flex flex-col p-4 gap-4 transition-colors hover:bg-sky-50 duration-100"
+      class="rounded shadow shadow-neutral-500 flex flex-col p-4 gap-4 transition-colors hover:bg-sky-50 duration-100 ease-in"
     >
       <div class="text-lg text-sky-800">
         {{ repo.name }}
@@ -53,7 +67,7 @@
       </div>
     </a>
   </div>
-  <div class="flex gap-2 mx-auto">
+  <div class="flex gap-2 mx-auto flex-wrap justify-center">
     <button
       class="hover:bg-sky-200 hover:text-sky-50 h-12 w-12 rounded flex items-center justify-center transition-colors duration-150 ease-in"
       (click)="prevPage()"
