@@ -1,28 +1,84 @@
-<main class="flex gap-4 p-4 flex-col">
-  <div class="flex gap-4">
-    <div
-      class="rounded-full overflow-hidden w-40 h-40 border border-neutral-200"
-    >
-      <img src="{{ user?.avatar_url }}" alt="{{ user?.name }}" />
+<main class="flex gap-10 p-4 flex-col">
+  <div class="flex gap-10" *ngIf="user">
+    <div>
+      <div
+        class="rounded-full overflow-hidden w-40 mb-4 h-40 border border-neutral-200"
+      >
+        <img src="{{ user.avatar_url }}" alt="{{ user.name }}" />
+      </div>
+      <a
+        class="underline hover:text-sky-600"
+        target="_blank"
+        href="{{ user.html_url }}"
+        >{{ user.html_url }}</a
+      >
     </div>
-    <div class="flex flex-col text-black">
-      <div>
-        {{ user?.name }}
+    <div class="flex flex-col text-black gap-2 p-4">
+      <h1 class="text-2xl font-medium">
+        {{ user.name }}
+      </h1>
+      <p>
+        {{ user.bio }}
+      </p>
+      <span>
+        {{ user.location }}
+      </span>
+      <a
+        class="text-sky-700"
+        href="{{ 'https://twitter.com/' + user.twitter_username }}"
+        target="_blank"
+      >
+        @{{ user.twitter_username }}
+      </a>
+    </div>
+  </div>
+  <div *ngIf="repos" class="grid grid-cols-2 gap-10">
+    <div
+      *ngFor="let repo of repos"
+      class="rounded shadow shadow-neutral-500 flex flex-col p-4 gap-4"
+    >
+      <div class="text-lg text-sky-800">
+        {{ repo.name }}
       </div>
-      <div>
-        {{ user?.bio }}
-      </div>
-      <div>
-        {{ user?.location }}
-      </div>
-      <div>
-        {{ user?.twitter_username }}
+      <div>{{ repo.description }}</div>
+      <div class="flex gap-4 items-center flex-wrap">
+        <div
+          *ngFor="let topic of repo.topics"
+          class="bg-sky-50 border border-sky-700 text-sky-700 py-1 px-2 rounded"
+        >
+          {{ topic }}
+        </div>
       </div>
     </div>
   </div>
-  <div>
-    <div *ngFor="let repo of repos">
-      {{ repo.name }}
-    </div>
+  <div class="flex gap-2 mx-auto">
+    <button
+      class="hover:bg-sky-200 hover:text-sky-50 h-12 w-12 rounded flex items-center justify-center transition-colors duration-150 ease-in"
+      (click)="prevPage()"
+    >
+      <span class="material-symbols-outlined text-sky-900">
+        arrow_back_ios
+      </span>
+    </button>
+    <button
+      *ngFor="let e of [].constructor(lastPage); let i = index"
+      [ngClass]="
+        page === i + 1
+          ? 'bg-sky-500 text-sky-50'
+          : 'bg-sky-100 hover:bg-sky-500 hover:text-sky-50 text-sky-900'
+      "
+      class="font-bold w-12 h-12 text-lg rounded transition-colors duration-150 ease-in"
+      (click)="setPage(i + 1)"
+    >
+      {{ i + 1 }}
+    </button>
+    <button
+      class="hover:bg-sky-200 hover:text-sky-50 h-12 w-12 rounded flex items-center justify-center transition-colors duration-150 ease-in"
+      (click)="nextPage()"
+    >
+      <span class="material-symbols-outlined text-sky-900">
+        arrow_forward_ios
+      </span>
+    </button>
   </div>
 </main>

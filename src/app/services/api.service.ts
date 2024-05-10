@@ -29,8 +29,10 @@ export class ApiService {
     return this.get<GithubUser>(`users/${githubUsername}`);
   }
 
-  getUserRepos(githubUsername: string) {
-    return this.get<GithubRepo[]>(`users/${githubUsername}/repos`);
+  getUserRepos(githubUsername: string, perPage: number = 10, page: number = 0) {
+    return this.get<GithubRepo[]>(
+      `users/${githubUsername}/repos?per_page=${perPage}&page=${page}`
+    );
   }
 
   getCachedData(key: string) {
