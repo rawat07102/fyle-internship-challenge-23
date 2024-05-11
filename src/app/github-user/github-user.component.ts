@@ -11,6 +11,7 @@ import { tap } from 'rxjs';
   styleUrls: ['./github-user.component.scss'],
 })
 export class GithubUserComponent implements OnInit {
+  loading = true;
   username: string = '';
   perPage: number = 10;
   page: number = 1;
@@ -40,10 +41,13 @@ export class GithubUserComponent implements OnInit {
   }
 
   fetchRepos() {
+    this.loading = true;
     this.apiService
       .getUserRepos(this.username, this.perPage, this.page)
       .pipe(tap((repos) => (this.repos = repos)))
-      .subscribe();
+      .subscribe(() => {
+        this.loading = false;
+      });
   }
 
   setPage(page: number) {
