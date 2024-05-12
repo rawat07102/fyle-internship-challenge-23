@@ -5,7 +5,6 @@ import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
   userNotFound = false;
