@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../services/api.service';
-import { GithubUser } from '../types/GithubUser.types';
-import { GithubRepo } from '../types/GithubRepo.types';
 import { tap } from 'rxjs';
+import { ApiService } from 'src/app/services/api.service';
+import { GithubRepo } from 'src/app/types/GithubRepo.types';
+import { GithubUser } from 'src/app/types/GithubUser.types';
 
 @Component({
-  selector: 'app-github-user',
-  templateUrl: './github-user.component.html',
-  styleUrls: ['./github-user.component.scss'],
+  selector: 'app-user-repositories',
+  templateUrl: './user-repositories.component.html',
+  styleUrls: ['./user-repositories.component.scss'],
 })
-export class GithubUserComponent implements OnInit {
+export class UserRepositoriesComponent implements OnInit {
   loading = true;
   username: string = '';
   perPage: number = 10;
   page: number = 1;
   user: GithubUser | undefined;
   lastPage: number = 1;
-  repos: GithubRepo[] | undefined;
+  repositories: GithubRepo[] | undefined;
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.username = this.route.snapshot.paramMap.get('username')!;
+    this.route.paramMap.subscribe((param) => {
+      this.username = param.get('username')!;
+    });
     this.apiService
       .getUser(this.username)
       .pipe(
@@ -34,7 +36,9 @@ export class GithubUserComponent implements OnInit {
     this.fetchRepos();
   }
 
-  onChange() {
+  handlePerPageChange(newPerPage: number) {
+    this.perPage = newPerPage;
+    console.log('parent', this.perPage);
     this.lastPage = Math.ceil(this.user?.public_repos! / this.perPage);
     this.page = 1;
     this.fetchRepos();
@@ -44,31 +48,15 @@ export class GithubUserComponent implements OnInit {
     this.loading = true;
     this.apiService
       .getUserRepos(this.username, this.perPage, this.page)
-      .pipe(tap((repos) => (this.repos = repos)))
+      .pipe(tap((repos) => (this.repositories = repos)))
       .subscribe(() => {
         this.loading = false;
       });
   }
 
-  setPage(page: number) {
-    if (page > 0 && page <= this.lastPage) {
-      this.page = page;
-      this.fetchRepos();
-    }
-  }
-
-  nextPage() {
-    if (this.page < this.lastPage) {
-      this.page++;
-      this.fetchRepos();
-    }
-  }
-
-  prevPage() {
-    if (this.page > 1) {
-      this.page--;
-      this.fetchRepos();
-    }
+  handlePageChange(newPageNumber: number) {
+    this.page = newPageNumber;
+    this.fetchRepos();
   }
 
   setPerPage(value: number) {

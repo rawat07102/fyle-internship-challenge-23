@@ -1,0 +1,9 @@
+<select
+  (change)="changePerPage()"
+  [(ngModel)]="perPage"
+  class="border rounded border-neutral-200 p-2 cursor-pointer hover:border-sky-500 transition-colors duration-100 ease-in"
+>
+  <option *ngFor="let e of [].constructor(100); let i = index" [value]="i + 1">
+    {{ i + 1 }}
+  </option>
+</select>

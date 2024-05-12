@@ -1,0 +1,28 @@
+<div class="flex gap-2 mx-auto flex-wrap justify-center">
+  <button
+    class="hover:bg-sky-200 hover:text-sky-50 h-12 w-12 rounded flex items-center justify-center transition-colors duration-150 ease-in"
+    (click)="prevPage()"
+  >
+    <span class="material-symbols-outlined text-sky-900"> arrow_back_ios </span>
+  </button>
+  <button
+    *ngFor="let e of [].constructor(lastPage); let i = index"
+    [ngClass]="
+      page === i + 1
+        ? 'bg-sky-500 text-sky-50'
+        : 'bg-sky-100 hover:bg-sky-500 hover:text-sky-50 text-sky-900'
+    "
+    class="font-bold w-12 h-12 text-lg rounded transition-colors duration-150 ease-in"
+    (click)="setPage(i + 1)"
+  >
+    {{ i + 1 }}
+  </button>
+  <button
+    class="hover:bg-sky-200 hover:text-sky-50 h-12 w-12 rounded flex items-center justify-center transition-colors duration-150 ease-in"
+    (click)="nextPage()"
+  >
+    <span class="material-symbols-outlined text-sky-900">
+      arrow_forward_ios
+    </span>
+  </button>
+</div>

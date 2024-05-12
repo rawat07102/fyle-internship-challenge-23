@@ -1,0 +1,23 @@
+<div *ngIf="repositories" class="grid grid-cols-2 gap-10">
+  <app-user-repository-card
+    *ngFor="let repository of repositories"
+    [repository]="repository"
+  ></app-user-repository-card>
+</div>
+
+<!-- Loading Skeleton -->
+<div *ngIf="!repositories" class="grid grid-cols-2 gap-10">
+  <div
+    *ngFor="let e of [].constructor(perPage)"
+    class="rounded shadow shadow-neutral-500 flex flex-col p-4 gap-4"
+  >
+    <div class="h-8 w-3/4 animate-pulse bg-neutral-300 rounded"></div>
+    <div class="h-10 w-full animate-pulse bg-neutral-300 rounded"></div>
+    <div class="flex gap-4 items-center flex-wrap">
+      <div
+        *ngFor="let e of [].constructor(3)"
+        class="rounded w-20 h-8 animate-pulse bg-neutral-300"
+      ></div>
+    </div>
+  </div>
+</div>

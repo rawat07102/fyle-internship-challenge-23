@@ -1,0 +1,18 @@
+<main class="flex gap-10 p-4 flex-col">
+  <app-user-info-header [user]="user"></app-user-info-header>
+  <div class="flex justify-end">
+    <app-per-page-selector
+      [perPage]="perPage"
+      (perPageChange)="handlePerPageChange($event)"
+    ></app-per-page-selector>
+  </div>
+  <app-repository-list
+    [repositories]="repositories"
+    [perPage]="perPage"
+  ></app-repository-list>
+  <app-pagination
+    [lastPage]="lastPage"
+    [page]="page"
+    (pageChange)="handlePageChange($event)"
+  ></app-pagination>
+</main>

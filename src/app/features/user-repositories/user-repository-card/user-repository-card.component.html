@@ -1,0 +1,19 @@
+<a
+  *ngIf="repository"
+  href="{{ repository.html_url }}"
+  target="_blank"
+  class="rounded shadow shadow-neutral-500 flex flex-col p-4 gap-4 transition-colors hover:bg-sky-50 duration-100 ease-in h-full"
+>
+  <div class="text-lg text-sky-800">
+    {{ repository.name }}
+  </div>
+  <div>{{ repository.description }}</div>
+  <div class="flex gap-4 items-center flex-wrap">
+    <div
+      *ngFor="let topic of repository.topics"
+      class="bg-sky-50 border border-sky-700 text-sky-700 py-1 px-2 rounded"
+    >
+      {{ topic }}
+    </div>
+  </div>
+</a>

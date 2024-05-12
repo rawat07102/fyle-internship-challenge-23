@@ -2,21 +2,21 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { GithubUserComponent } from './github-user/github-user.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SearchModule } from './features/search/search.module';
+import { UserRepositoriesModule } from './features/user-repositories/user-repositories.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SearchBarComponent,
-    GithubUserComponent,
-    PageNotFoundComponent,
+  declarations: [AppComponent, PageNotFoundComponent],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    SearchModule,
+    UserRepositoriesModule,
   ],
-  imports: [BrowserModule, HttpClientModule, FormsModule, AppRoutingModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
