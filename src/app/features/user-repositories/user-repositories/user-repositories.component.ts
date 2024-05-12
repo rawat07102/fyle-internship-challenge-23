@@ -11,7 +11,6 @@ import { GithubUser } from 'src/app/types/GithubUser.types';
   styleUrls: ['./user-repositories.component.scss'],
 })
 export class UserRepositoriesComponent implements OnInit {
-  loading = true;
   username: string = '';
   perPage: number = 10;
   page: number = 1;
@@ -45,13 +44,10 @@ export class UserRepositoriesComponent implements OnInit {
   }
 
   fetchRepos() {
-    this.loading = true;
     this.apiService
       .getUserRepos(this.username, this.perPage, this.page)
       .pipe(tap((repos) => (this.repositories = repos)))
-      .subscribe(() => {
-        this.loading = false;
-      });
+      .subscribe();
   }
 
   handlePageChange(newPageNumber: number) {
