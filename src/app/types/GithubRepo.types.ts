@@ -6,5 +6,4 @@ export interface GithubRepo {
   html_url: string;
   topics: string[];
   updated_at: string;
-  owner: GithubUser
 }
