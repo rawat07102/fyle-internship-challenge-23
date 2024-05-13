@@ -1,5 +1,6 @@
-## Search Page
-1. Search Bar
-2. Results
-3. Zero State
-4. Loading
+## Testing
+run the below command for testing
+```bash
+npm test
+```
+code coverage will be shown by default

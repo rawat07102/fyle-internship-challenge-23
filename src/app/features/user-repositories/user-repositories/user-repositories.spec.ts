@@ -4,7 +4,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { of } from 'rxjs';
 import { GithubUser } from 'src/app/types/GithubUser.types';
 import { GithubRepo } from 'src/app/types/GithubRepo.types';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { UserRepositoriesModule } from '../user-repositories.module';
 
 describe('UserRepositoriesComponent', () => {
@@ -42,7 +42,7 @@ describe('UserRepositoriesComponent', () => {
     getUser(_githubUsername) {
       return of(mockGithubUser);
     },
-    getUserRepos(githubUsername, perPage, page) {
+    getUserRepos(_githubUsername, _perPage, _page) {
       return of(mockRepos);
     },
   };

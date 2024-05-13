@@ -1,5 +1,3 @@
-import { GithubUser } from "./GithubUser.types";
-
 export interface GithubRepo {
   name: string;
   description: string;
