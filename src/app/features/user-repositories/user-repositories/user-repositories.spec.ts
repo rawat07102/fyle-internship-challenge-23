@@ -71,10 +71,12 @@ describe('UserRepositoriesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should set user on init', () => {
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(component.user).toEqual(mockGithubUser);
+  describe('OnInit()', () => {
+    it('should set user on init', () => {
+      component.ngOnInit();
+      fixture.detectChanges();
+      expect(component.user).toEqual(mockGithubUser);
+    });
   });
 
   describe('fetchRepos()', () => {
@@ -82,6 +84,15 @@ describe('UserRepositoriesComponent', () => {
       component.fetchRepos();
       fixture.detectChanges();
       expect(component.repositories).toEqual(mockRepos);
+    });
+  });
+
+  describe('setPerPage()', () => {
+    it('should set perPage to given value', () => {
+      const mockPageNumber = 5;
+      component.setPerPage(mockPageNumber);
+      fixture.detectChanges();
+      expect(component.perPage).toBe(mockPageNumber);
     });
   });
 });
